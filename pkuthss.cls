@@ -86,6 +86,8 @@
 \RequirePackage{fancyhdr}
 % Provides `\uline' used in `\maketitle' (but do not mess with `\emph').
 \RequirePackage[normalem]{ulem}
+% Veritcal alignment in table
+\RequirePackage{array, multirow}
 % `\AtEndOfClass' used to avoid `PDF destination not defined' with setspace.
 \AtEndOfClass{\RequirePackage{hyperref}}
 
@@ -242,6 +244,9 @@
 \thss@int@infoitema{emajor}
 \thss@int@infoitema{direction}
 \thss@int@infoitema{cmentor}
+\thss@int@infoitema{cmentornotitle}
+\thss@int@infoitema{cmentortitle}
+\thss@int@infoitema{cmentorinstitute}
 \thss@int@infoitema{ementor}
 \thss@int@infoitema{ckeywords}
 \thss@int@infoitema{ekeywords}
@@ -254,10 +259,24 @@
 \thss@int@infoitemb{thesiscover}
 \thss@int@infoitemb{cabstractname}
 \thss@int@infoitemb{eabstractname}
+\thss@int@infoitema{paperscore}
 % Set up document information using the `key = value' grammar.
 \newcommand*{\pkuthssinfo}[1]{\setkeys{thss@info}{#1}}
 % Becomes \newline in the \makeblind scope.
 \newcommand{\thssnl}{\\}
+
+% Pass doc info to sheet.tex
+\newcommand{\myctitle}{\@ctitle}
+\newcommand{\myetitle}{\@etitle}
+\newcommand{\mystudentid}{\@studentid}
+\newcommand{\authorsname}{\@cauthor}
+\newcommand{\mycmajor}{\@cmajor}
+\newcommand{\myschool}{\@school}
+\newcommand{\mycmentor}{\@cmentor}
+\newcommand{\mycmentortitle}{\@cmentortitle}
+\newcommand{\mycmentornotitle}{\@cmentornotitle}
+\newcommand{\mymentorinstitute}{\@cmentorinstitute}
+\newcommand{\myscore}{\@paperscore}
 
 % Set up page layout.
 \geometry{a4paper, hmargin = 2.6cm, headheight = 0.5cm, headsep = 0.6cm}
@@ -313,16 +332,24 @@
 \fi
 % The actual page style setup.
 \fancypagestyle{plain}{
+	% \fancyhf{}\renewcommand*{\headrulewidth}{0.75bp}
+	% \fancyfoot[C]{\zihao{5}\normalfont{\thepage}}
+	% 
+	% \iffalse % 不分开考虑奇偶页
+	% 	\fancyhead[CE]{\zihao{5}\normalfont{\cuniversity\cthesisname}}
+	% 	\fancyhead[CO]{\zihao{5}\normalfont\thss@int@setcase{\leftmark}}
+	% \else
+	% 	% 单双面使用同样的页眉
+	% 	\fancyhead[L]{\zihao{5}\normalfont{\cuniversity\cthesisname}}
+	% 	\fancyhead[R]{\zihao{5}\normalfont\thss@int@setcase{\leftmark}}
+	% \fi
 	\fancyhf{}\renewcommand*{\headrulewidth}{0.75bp}
 	\fancyfoot[C]{\zihao{5}\normalfont{\thepage}}
-	
-	\iffalse % 不分开考虑奇偶页
+	\if@twoside
 		\fancyhead[CE]{\zihao{5}\normalfont{\cuniversity\cthesisname}}
 		\fancyhead[CO]{\zihao{5}\normalfont\thss@int@setcase{\leftmark}}
 	\else
-		% 单双面使用同样的页眉
-		\fancyhead[L]{\zihao{5}\normalfont{\cuniversity\cthesisname}}
-		\fancyhead[R]{\zihao{5}\normalfont\thss@int@setcase{\leftmark}}
+		\fancyhead[C]{\zihao{5}\normalfont\thss@int@setcase{\leftmark}}
 	\fi
 }
 \pagestyle{plain}
@@ -341,6 +368,7 @@
 	\parbox[t]{#2}{%
 		\newcount\thss@tmp@linecount
 		\thss@tmp@linecount=#1
+    \renewcommand{\ULdepth}{15pt}
 		\loop\ifnum\thss@tmp@linecount>0
 			% Fill specified space with underline on the bottom line. `\underline'
 			% draws line on the baseline (not the bottom line), and this is why
@@ -364,27 +392,25 @@
 		% Emblem and inscription of the university, and type of thesis.
 		{%
 			% 小初
-			\zihao{-0}\includegraphics[height = 1.9em]{pkulogo}\hspace{0.3em}%
-			\raisebox{0.32em}{\includegraphics[height = 1.3em]{pkuword}}\\[0.5em]
-			
+			\zihao{-0}\includegraphics[height = 1.9em]{pku_badge.png}\\[0.5em]
 			{\bfseries\ifx\thesiscover\empty{\cthesisname}\else{\thesiscover}\fi}%
 		}
 		\vfill
 		% Title of the thesis.
 		{%
-			\newcommand{\titlelabel}{% 题目标签
-				\zihao{3}\bfseries
-				\linespread{1.6}\selectfont{\label@ctitle}
+			\newcommand{\titlelabel}{% 题目标签，
+				\zihao{2}\bfseries % 二号
+				\linespread{1.806}\selectfont{\label@ctitle} % line space: 26 pt, 0.917cm
 			}
 			\titlelabel
 			{
 				\thss@int@fillinblank
-					{3} % 标题行数
+					{4} % 标题行数
 					{0.64\textwidth}
 					{
-						{\zihao{2}\bfseries\kaishu\@ctitle}%中文标题，楷体二号加粗
+						{\zihao{1}\bfseries\heiti\@ctitle}%中文标题，黑体一号加粗
 						\\ % 换行
-						{\zihao{3}\bfseries\@etitle}%英文标题
+						{\zihao{2}\bfseries\@etitle}%英文标题，二号加粗
 					}
 			}
 		}
@@ -394,28 +420,28 @@
 			% Slightly adjust the line skip when using new font size.
 			\zihao{3}\linespread{1.75}\selectfont
 			\def\thss@tmp@len{0.56\textwidth}
-			\begin{tabular}{l@{\extracolsep{0.2em}}c}
+			\begin{tabular}{l@{\extracolsep{0.2em}}>{\centering\arraybackslash}m{\thss@tmp@len}}
 				{\bfseries\label@cauthor}		&
-				\thss@int@fillinblank{1}{\thss@tmp@len}{\fangsong\@cauthor}		\\
+				{\fangsong\@cauthor}		\\ \cline{2-2}
 				{\bfseries\label@studentid}	&
-				\thss@int@fillinblank{1}{\thss@tmp@len}{\fangsong\@studentid}	\\
+				{\fangsong\@studentid}	\\ \cline{2-2}
 				% 院系
 				{\bfseries\label@school}		&
-				\thss@int@fillinblank{1}{\thss@tmp@len}{\fangsong\@school}		\\
+				{\fangsong\@school}		\\ \cline{2-2}
 				% 本科专业
 				{\bfseries\label@cmajor}		&
-				\thss@int@fillinblank{1}{\thss@tmp@len}{\fangsong\@cmajor}		\\
+				{\fangsong\@cmajor}		\\ \cline{2-2}
 				% 不需要填研究方向
 				%{\bfseries\label@direction}	&
 				%\thss@int@fillinblank{1}{\thss@tmp@len}{\fangsong\@direction}	\\
 				% 指导老师
 				{\bfseries\label@cmentor}		&
-				\thss@int@fillinblank{1}{\thss@tmp@len}{\fangsong\@cmentor}		\\
+				{\fangsong\@cmentor}		\\ \cline{2-2}
 			\end{tabular}%
 		}
 		\vfill
-		% 日期：楷体小二
-		{\zihao{-2}\kaishu\@date}
+		% 日期：黑体三号
+		{\zihao{3}\heiti\@date}
 	\par\end{titlepage}%
 }
 

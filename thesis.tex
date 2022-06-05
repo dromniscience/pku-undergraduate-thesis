@@ -11,7 +11,8 @@
 % 调出。
 
 % 为使用单页设置，可以在 [] 加入"oneside"选项 
-\documentclass[UTF8,oneside]{pkuthss}
+\documentclass[UTF8,twoside]{pkuthss}
+
 % 如果的确须要使脚注按页编号的话，可以去掉后面 footmisc 包的注释。
 %\usepackage[perpage]{footmisc}
 
@@ -41,20 +42,24 @@
 \pkuthssinfo{
 	cthesisname = {本科生毕业论文}, ethesisname = {Thesis},
 	thesiscover = {本科生毕业论文},
-	% 长标题可用 \thssnl 强制换行，不能用“\\”（双盲版会出错）。
-	ctitle = {测试文档 abc},
-	etitle = {Test Document},
+	% 长标题不用手动换行。如需强制换行，可用 \thssnl，不能用“\\”（双盲版会出错）。
+	ctitle = {这样长的标题今后再也不会写了，即使能自动换行},
+	etitle = {Most Titles Take Up Two Rows Including This One},
 	% Use ~ to add non-breaking space
-	cauthor = {某某}, eauthor = {Test}, date = {二〇二一~年~六~月},
-	studentid = {0123456789}, school = {某某学院},
-	cmajor = {某某专业}, emajor = {Some Major},
+	cauthor = {赵钱孙李}, eauthor = {Test}, date = {二〇二二~年~六~月},
+	studentid = {01234567890}, school = {某某学院},
+	cmajor = {某某某专业与技术}, emajor = {Some Major},
 	% direction = {某某方向}, % 本科毕业无需填方向
-	cmentor = {某某教授}, ementor = {Prof.\ Somebody},
-	ckeywords = {其一，其二},
-	ekeywords = {First, Second},
+	cmentor = {某某教授}, ementor = {Prof.\ Somebody}, % 用于填写封面（可带教职）
+  cmentornotitle = {导师}, % 导师的姓名，用于填写评阅表
+  cmentortitle = {教职}, % 导师的教职，用于填写评阅表
+  cmentorinstitute = {很长的研究机构会自动换行}, % 无需手动换行，控制字数<=12即可。如果字数>12，将会溢出表格
+	ckeywords = {其一，其二}, % 中文摘要关键词
+	ekeywords = {First, Second}, % 英文摘要关键词
 	% 以下两项无双盲评审需求的用户可保持原状。
 	% 注意 discipline/major 分别指一/二级学科。
 	% blindid = {9876543210}, discipline = {某某学科}
+  paperscore = {}, % 如果论文成绩须在评阅表中手动填写，此处留空即可。
 }
 % 载入参考文献数据库（注意不要省略“.bib”）。
 \addbibresource{thesis.bib}
@@ -88,6 +93,7 @@
 	\ifblind\makeblind\else\maketitle\fi
 
 	% 论文导师评阅表
+  \cleardoublepage
 	\include{chap/sheet}
 
 	% 版权声明。封面要求单面打印，故须新开右页。
@@ -97,6 +103,7 @@
 	% 此后到下一 \pagestyle 命令之前正常排版页眉和页脚。
 	\cleardoublepage
 	\pagestyle{plain}
+  
 	% 重置页码计数器，用大写罗马数字排版此部分页码。
 	\setcounter{page}{0}
 	\pagenumbering{Roman}

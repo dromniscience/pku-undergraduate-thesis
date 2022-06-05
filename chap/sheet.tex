@@ -7,47 +7,82 @@
 	{\songti\zihao{3}{北京大学本科毕业论文导师评阅表}}
 \end{center}
 
-\def\mentorcomment{Lorem Ipsum，也称乱数假文或者哑元文本， 是印刷及排版领域所常用的虚拟文字。由于曾经一台匿名的打印机刻意打乱了一盒印刷字体从而造出一本字体样品书，Lorem Ipsum从西元15世纪起就被作为此领域的标准文本使用。它不仅延续了五个世纪，还通过了电子排版的挑战，其雏形却依然保存至今。在1960年代，“Leatraset”公司发布了印刷着Lorem Ipsum段落的纸张，从而广泛普及了它的使用。最近，计算机桌面出版软件“Aldus PageMaker”也通过同样的方式使Lorem Ipsum落入大众的视野。}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                   %
+%                  请修改以下部分！                    %
+%                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 导师评语
+
+\def\mentorcomment{\parbox[l]{35.88em}{
+  \qquad
+  哭过笑过恋过恨过，仿佛是一梦蹉跎。
+
+  \qquad
+  迷惑失落忧郁寂寞，谁都是凡人一个。
+
+  \qquad
+  细水还来不及长流，抽刀已经断不了情愁。
+
+  \qquad
+  牵手还是放手，不如一歌。
+
+  \qquad
+  在遗忘中不舍，醉醒交错，
+
+  \qquad
+  青春大概如你所说。
+  
+  \qquad
+  在花落时结果，期望很多，青春大概都这样过。
+
+  \qquad
+
+  \qquad 评语部分会自动换行。两个连续的空行代表一个新的段落，以上《青春大概》歌词的分段就是这样完成的。
+  导师签名部分相对于评语正文的结束位置的竖直距离是固定的，因此请控制导师评语的长度，使其能容纳在本页内。
+  用户只需修改本部分的文字，而无需调整任何其他的参数。
+
+  \qquad 本表格里的除导师评语部分外的可变信息都在主文件{\tt thesis.tex}以文档信息的方式定义。它们在封面和本表格中共享。
+  例如，只要你在{\tt thesis.tex}中修改了论文的中文标题，那么此处表格里的内容将在下次编译时随封面标题同步更新。
+
+  \qquad {\tt thesis.tex}内你应当只修改导师评语。
+}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                   %
+%                   不要改动以下部分！                 %
+%                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\signatureplaceholder{\parbox[l]{16em}{
+  \phantom{青春大概}
+  
+  导师签字：\phantom{青春大概}
+
+  \phantom{青春大概}
+}}
 
 \begin{table}[H]
-	\centering
-	\begin{tabular}{|llllll|}
-		\hline
-		\multicolumn{1}{|p{4em}|}{学生姓名} & \multicolumn{1}{p{3em}|}{某某某} & \multicolumn{1}{p{5em}|}{学生学号} & \multicolumn{1}{l|}{1700012345} & \multicolumn{1}{p{4em}|}{论文成绩} &  \multicolumn{1}{r|}{}\\
-		\hline
-		\multicolumn{1}{|p{4em}|}{学院(系)} & \multicolumn{3}{l|}{信息科学技术学院} & \multicolumn{1}{p{6em}|}{学生所在专业} & \multicolumn{1}{l|}{计算机科学与技术} \\
-		\hline
-		\multicolumn{1}{|r|}{\multirow{2}[2]{*}{导师姓名}} & 
-		\multicolumn{1}{l|}{\multirow{2}[2]{*}{某某}} & 
-		\multicolumn{1}{p{5em}|}{导师单位/} & 
-		\multicolumn{1}{c|}{\multirow{2}[2]{*}{\makecell{单位}}} & 
-		\multicolumn{1}{p{6em}|}{\multirow{2}[2]{*}{导师职称}} & 
-		\multirow{2}[2]{*}{职称} \\
-		\multicolumn{1}{|r|}{} & 
-		\multicolumn{1}{r|}{} & 
-		\multicolumn{1}{p{5em}|}{所在研究所} & 
-		\multicolumn{1}{c|}{} & 
-		\multicolumn{1}{r|}{} &  \\
-		\hline
-		\multicolumn{2}{|p{9em}|}{\centering{论文题目}} & 
-		\multicolumn{4}{c|}{乱数假文} \\
-		\multicolumn{2}{|p{9em}|}{\centering{（中、英文）}} & 
-		\multicolumn{4}{c|}{\makecell{Lorem Ipsum}} \\
-		\hline
-		\multicolumn{6}{|p{35.88em}|}{\center{导师评语}} \\
-		\multicolumn{6}{|p{35.88em}|}{\centering\kaishu{（包含对论文的性质、难度、分量、综合训练等是否符合培养目标的目的等评价）}} \\
-		\multicolumn{6}{|c|}{} \\
-		\multicolumn{6}{|p{35.88em}|}{\quad\quad\mentorcomment} \\
-		\multicolumn{6}{|c|}{} \\
-		\multicolumn{6}{|c|}{} \\
-		\multicolumn{6}{|c|}{} \\
-		\multicolumn{6}{|c|}{} \\
-		\multicolumn{6}{|p{35.88em}|}{                                                                             \hfill 导师签名：\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad } \\
-		\multicolumn{6}{|c|}{} \\
-		\multicolumn{6}{|p{35.88em}|}{\hfill 年 \qquad\quad 月 \qquad\quad 日 \qquad\qquad\qquad} \\
-		\multicolumn{6}{|r|}{} \\
-		\hline
-	\end{tabular}
+\centering
+\begin{tabular}{|m{4em}m{4em}m{5em}m{6em}m{6em}l|}
+\hline
+\multicolumn{1}{|l|}{学生姓名}                  & \multicolumn{1}{m{4em}|}{\authorsname}                  & \multicolumn{1}{l|}{学生学号}                  & \multicolumn{1}{m{6em}|}{\mystudentid}                  & \multicolumn{1}{l|}{论文成绩}                  &       \myscore                  \\ \hline
+\multicolumn{1}{|l|}{学院(系)}                  & \multicolumn{3}{l|}{\myschool}                                                                                                    & \multicolumn{1}{l|}{学生所在专业}                  &    \mycmajor                                    \\ \hline
+\multicolumn{1}{|l|}{\multirow{2}{*}{导师姓名}} & \multicolumn{1}{l|}{\multirow{2}{4em}{\mycmentornotitle}} & \multicolumn{1}{l|}{\multirow{2}{5em}{导师单位/ 所在研究所}} & \multicolumn{1}{l|}{\multirow[]{2}{6em}{\mymentorinstitute}} & \multicolumn{1}{l|}{\multirow{2}{*}{导师职称}} & \multirow{2}{*}{\mycmentortitle}                      \\
+\multicolumn{1}{|l|}{}                  & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{}                  & \multicolumn{1}{l|}{}                  &                                        \\ \hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{\shortstack{论文题目\\[0.35em](中、英文)}}} & \multicolumn{4}{c|}{\multirow{2}{*}{\shortstack{\myctitle\\[0.35em]\myetitle}}}  \\
+\multicolumn{2}{|c|}{}                  & \multicolumn{4}{c|}{} \\ \hline
+\multicolumn{6}{|m{36.88em}|}{\center{导师评语}} \\
+\multicolumn{6}{|m{36.88em}|}{\centering\kaishu{(包含对论文的性质、难度、分量、综合训练等是否符合培养目标的目的等评价)}} \\
+\multicolumn{6}{|m{36.88em}|}{} \\
+\multicolumn{6}{|m{36.88em}|}{{\mentorcomment}} \\
+\multicolumn{6}{|m{36.88em}|}{} \\
+\multicolumn{6}{|m{36.88em}|}{\hfill\signatureplaceholder} \\
+\multicolumn{6}{|m{36.88em}|}{\hfill 年 \qquad\quad 月 \qquad\quad 日 \qquad\qquad\qquad} \\
+\multicolumn{6}{|c|}{} \\ \hline
+\end{tabular}
 \end{table}
 
 \renewcommand\arraystretch{1}
